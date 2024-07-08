@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task Detail</title>
+</head>
+<body>
+    <h1>{{ task.title }}</h1>
+    <p>{{ task.description }}</p>
+    <p>Status: {{ task.get_status_display }}</p>
+    <a href="{% url 'task_update' task.pk %}">Edit</a>
+    <form action="{% url 'task_delete' task.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'task_list' %}">Back to list</a>
+    <h2>Feedback</h2>
+    <form method="post" action="{% url 'add_feedback' task.pk %}">
+        {% csrf_token %}
+        <textarea name="feedback_text"></textarea>
+        <button type="submit">Submit Feedback</button>
+    </form>
+</body>
+</html>
